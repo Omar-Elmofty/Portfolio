@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Omar Elmofty</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            margin-right: 20px;
+            margin-left: 20 px;
+        }
+
+        .bio {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Omar Elmofty</h1>
+    </header>
+
+    <main class="main-content">
+        <img class="profile-image" src="{{ url_for('static', filename='profile-pic.jpg') }}" alt="Omar Elmofty">
+        <div class="bio">
+            <h2>About Me</h2>
+            <p>
+                <!-- Replace this with your actual bio -->
+                I am a software developer with a passion for creating impactful solutions. I specialize in Python and
+                have experience in web development, data analysis, and machine learning.
+            </p>
+            <a href="https://www.linkedin.com/in/omar-s-elmofty" class="btn" target="_blank">LinkedIn</a>
+            <a href="https://medium.com/@oelmofty" class="btn" target="_blank">Medium</a>
+            <a href="https://github.com/Omar-Elmofty" class="btn" target="_blank">Github</a>
+            <a href="/portfolio" class="btn" target="_blank">Open Portfolio Analyzer</a>
+        </div>
+
+
+    </main>
+</body>
+
+</html>

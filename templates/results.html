@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analysis Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    {% if asset_results %}
+    <h1>{{ asset_results.asset }} Results</h1>
+    {% endif %}
+    {% if portfolio_results %}
+    <h1>Portfolio Results</h1>
+    {% endif %}
+
+    <div class="results">
+        {% if portfolio_results %}
+        {% if portfolio_results.optimized %}
+        <p>Optimized Portfolio Weights:</p>
+        <ul>
+            {% for ticker, weight in portfolio_results.optimized_weights.items() %}
+            <li>{{ ticker }}: {{ weight }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p>Annual Return: {{ portfolio_results.return }}</p>
+        <p>Annual Volatility: {{ portfolio_results.volatility }}</p>
+        <p>Sharpe ratio: {{ portfolio_results.sharpe_ratio }}</p>
+        <p>Alpha: {{ portfolio_results.alpha }}</p>
+        <p>Beta: {{ portfolio_results.beta }}</p>
+        <p>Max drawdown: {{ portfolio_results.max_drawdown }}</p>
+        <div class="image-container">
+            <img src="data:image/png;base64,{{ plot_url }}">
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="results">
+        {% if asset_results %}
+        <p>Annual Return: {{ asset_results.asset_return }}</p>
+        <p>Annual Volatility: {{ asset_results.asset_volatility }}</p>
+        <p>Sharpe ratio: {{ asset_results.sharpe_ratio }}</p>
+        <p>Alpha: {{ asset_results.alpha }}</p>
+        <p>Beta: {{ asset_results.beta }}</p>
+        <p>Max drawdown: {{ asset_results.max_drawdown }}</p>
+        <div class="image-container">
+            <img src="data:image/png;base64,{{ plot_url }}">
+        </div>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('home') }}">Created by Omar Elmofty</a>
+</body>
+
+</html>

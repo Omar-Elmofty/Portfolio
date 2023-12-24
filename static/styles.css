@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+form,
+.results {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+input[type="text"] {
+    display: block;
+    width: 10%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 0 auto;
+}
+
+input[type="date"] {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    padding: 0.5em 1em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.results p {
+    background-color: #e9ecef;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+a {
+    display: block;
+    margin-top: 2em;
+    text-align: center;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.add-ticker {
+    padding: 0.5em 1em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.add-ticker:hover {
+    background-color: #0056b3;
+}
+
+.tickers div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50%;
+    /* Adjust as needed */
+    margin: 0 auto;
+    /* Center the div */
+}
+
+input[name="tickers[]"],
+input[name="weights[]"] {
+    width: 70px;
+    /* Adjust as needed */
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.delete-button {
+    width: 20px;
+    height: 20px;
+    background-color: #b6b6b6;
+    /* Red */
+    color: white;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    margin: 5px;
+}
+
+.delete-button:hover {
+    background-color: #e60000;
+    /* Darker red */
+}

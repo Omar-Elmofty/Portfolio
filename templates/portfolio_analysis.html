@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Portfolio Analyzer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Portfolio Analyzer</h1>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Asset')">Single Asset</button>
+        <button class="tablinks" onclick="openTab(event, 'Portfolio-Analyzer')">Multiple Assets</button>
+        <button class="tablinks" onclick="openTab(event, 'Portfolio-Optimizer')">Portfolio Optimizer</button>
+    </div>
+
+    <div id="Portfolio-Analyzer" class="tabcontent">
+        <h2>Analyze Multiple Assets</h2>
+        <form id="portfolio-form" action="{{ url_for('analyze_portfolio') }}" method="post" target="_blank">
+            <label>Enter List of Asset Tickers:</label><br>
+            <div id="analyzer-tickers" class="tickers">
+                <br><button type="button" id="analyzer-add-ticker" class="add-ticker">Add ticker +</button><br>
+            </div>
+            <label for="start_date">Start Date:</label><br>
+            <input type="date" id="start_date" name="start_date"><br>
+            <label for="end_date">End Date:</label><br>
+            <input type="date" id="end_date" name="end_date"><br>
+            <input type="submit" value="Analyze Portfolio"> <br>
+        </form>
+    </div>
+
+    <div id="Portfolio-Optimizer" class="tabcontent">
+        <h2>Optimize Portfolio</h2>
+        <form id="portfolio-form" action="{{ url_for('optimize_portfolio') }}" method="post" target="_blank">
+            <label>Enter List of Asset Tickers:</label><br>
+            <div id="optimizer-tickers" class="tickers">
+                <br><button type="button" id="optimizer-add-ticker" class="add-ticker">Add ticker +</button><br>
+            </div>
+            <label for="start_date">Start Date:</label><br>
+            <input type="date" id="start_date" name="start_date"><br>
+            <label for="end_date">End Date:</label><br>
+            <input type="date" id="end_date" name="end_date"><br>
+            <input type="submit" id="optimize" value="Optimize Portfolio for Sharpe Ratio"><br>
+        </form>
+    </div>
+
+    <div id="Asset" class="tabcontent">
+        <h2>Analyze Single Asset</h2>
+        <form action="{{ url_for('analyze_asset') }}" method="post" target="_blank">
+            <label for="ticker">Ticker:</label><br>
+            <input type="text" id="ticker" name="ticker" placeholder="AAPL"><br>
+            <label for="start_date">Start Date:</label><br>
+            <input type="date" id="start_date" name="start_date"><br>
+            <label for="end_date">End Date:</label><br>
+            <input type="date" id="end_date" name="end_date"><br>
+            <input type="submit" value="Analyze Asset">
+        </form>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+            localStorage.setItem('activeTab', tabName);
+        }
+
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            document.querySelector('.tablinks[onclick="openTab(event, \'' + activeTab + '\')"]').click();
+        } else {
+            document.querySelector('.tablinks[onclick="openTab(event, \'Asset\')"]').click();
+        }
+
+        function addTicker(add_weight, div_id) {
+            var tickerInput = document.createElement('input');
+            tickerInput.type = 'text';
+            tickerInput.name = 'tickers[]';
+            tickerInput.placeholder = 'Ticker';
+
+            var inputDiv = document.createElement('div');
+            inputDiv.appendChild(tickerInput);
+
+            if (add_weight) {
+                var weightInput = document.createElement('input');
+                weightInput.type = 'number';
+                weightInput.step = '0.01';
+                weightInput.name = 'weights[]';
+                weightInput.placeholder = 'Weight';
+                inputDiv.appendChild(weightInput);
+
+            }
+
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'X';
+            deleteButton.className = 'delete-button';
+            deleteButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                tickersDiv.removeChild(inputDiv);
+            });
+            inputDiv.appendChild(deleteButton);
+            inputDiv.prepend(document.createElement('br'));
+
+            var tickersDiv = document.getElementById(div_id);
+            tickersDiv.insertBefore(inputDiv, tickersDiv.firstChild);
+        }
+
+        document.getElementById('analyzer-add-ticker').addEventListener('click', function () {
+            addTicker(true, 'analyzer-tickers')
+        });
+
+        document.getElementById('optimizer-add-ticker').addEventListener('click', function () {
+            addTicker(false, 'optimizer-tickers')
+        });
+    </script>
+    <a href="{{ url_for('home') }}">Created by Omar Elmofty</a>
+
+</body>
+
+</html>
