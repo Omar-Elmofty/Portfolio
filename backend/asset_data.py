@@ -14,21 +14,22 @@ class AssetData:
         self.daily_returns = self.calculate_daily_returns()
 
     def download_data(self, ticker):
-        directory = "market_data"
-        filename = f"{directory}/{ticker}_{self.start_date}_{self.end_date}.csv"
-        if not os.path.exists(directory):
-            os.makedirs(directory)
+        # directory = "market_data"
+        # filename = f"{directory}/{ticker}_{self.start_date}_{self.end_date}.csv"
+        # if not os.path.exists(directory):
+            # os.makedirs(directory)
 
-        if os.path.exists(filename):
-            # Load data from CSV file if it exists
-            data = pd.read_csv(filename, index_col="Date")
-            # Convert the 'Date' column to datetime format
-            data.index = pd.to_datetime(data.index)
-        else:
-            # Download historical data as a dataframe
-            data = yf.download(ticker, start=self.start_date, end=self.end_date)
-            # Save data to CSV file
-            data.to_csv(filename)
+        # if os.path.exists(filename):
+        #     # Load data from CSV file if it exists
+        #     data = pd.read_csv(filename, index_col="Date")
+        #     # Convert the 'Date' column to datetime format
+        #     data.index = pd.to_datetime(data.index)
+        # else:
+        #     # Download historical data as a dataframe
+        #     data = yf.download(ticker, start=self.start_date, end=self.end_date)
+        #     # Save data to CSV file
+        #     data.to_csv(filename)
+        data = yf.download(ticker, start=self.start_date, end=self.end_date)
         data["daily_returns"] = data["Adj Close"].pct_change()
         data.dropna(inplace=True)
         return data

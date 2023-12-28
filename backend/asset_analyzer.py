@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import empyrical
 import matplotlib.pyplot as plt
 from asset_data import AssetData
-
 
 class AssetAnalyzer:
     def __init__(self, ticker, start_date, end_date, market_ticker="^GSPC"):
@@ -14,31 +12,38 @@ class AssetAnalyzer:
         self.market_ticker = market_ticker
 
     def sharpes_ratio(self):
-        return empyrical.sharpe_ratio(self.asset_data.daily_returns)
+        from empyrical import sharpe_ratio
+        return sharpe_ratio(self.asset_data.daily_returns)
 
     def alpha_beta(self):
-        return empyrical.alpha_beta(
+        from empyrical import alpha_beta
+        return alpha_beta(
             self.asset_data.daily_returns, self.market_data.daily_returns
         )
 
     def max_drawdown(self):
-        return empyrical.max_drawdown(self.asset_data.daily_returns)
+        from empyrical import max_drawdown
+        return max_drawdown(self.asset_data.daily_returns)
 
     def annual_return(self):
-        return empyrical.annual_return(self.asset_data.daily_returns)
+        from empyrical import annual_return
+        return annual_return(self.asset_data.daily_returns)
 
     def annual_volatility(self):
-        return empyrical.annual_volatility(self.asset_data.daily_returns)
+        from empyrical import annual_volatility
+        return annual_volatility(self.asset_data.daily_returns)
 
     def plot(self):
+        from empyrical import cum_returns
         plt.figure()
-        empyrical.cum_returns(self.asset_data.daily_returns).plot()
-        empyrical.cum_returns(self.market_data.daily_returns).plot()
-        plt.legend([f"{self.ticker} Returns", f"{self.market_ticker} Returns"])
-        plt.title(f"{self.ticker} vs Market ({self.market_ticker})")
+        self.asset_data.data["Adj Close"].plot()
+        # cum_returns(self.asset_data.daily_returns).plot()
+        # cum_returns(self.market_data.daily_returns).plot()
+        # plt.legend([f"{self.ticker} Returns", f"{self.market_ticker} Returns"])
+        # plt.title(f"{self.ticker} vs Market ({self.market_ticker})")
+        plt.ylabel("Security Price")
         plt.xlabel("Date")
-        plt.ylabel("Cumulative Returns")
-
+        # plt.ylabel("Cumulative Returns")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze an asset.")

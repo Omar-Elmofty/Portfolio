@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 
 import numpy as np
-from scipy.optimize import minimize
 from asset_data import AssetData
-import empyrical
 import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 class PortfolioOptimizer:
     def __init__(
@@ -20,6 +17,8 @@ class PortfolioOptimizer:
         return_weight=0.0,
         volatility_weight=0.0,
     ):
+        import empyrical
+        
         self.assets = [AssetData(ticker, start_date, end_date) for ticker in tickers]
         self.market_data = AssetData(market_ticker, start_date, end_date)
         self.data = self.combine_data()
@@ -53,23 +52,30 @@ class PortfolioOptimizer:
         return self.data_pct_change.mul(weights_df[0], axis=1).sum(axis=1)
 
     def sharpe_ratio(self, weights):
+        import empyrical
         return empyrical.sharpe_ratio(self.portfolio_returns(weights))
 
     def alpha_beta(self, weights):
+        import empyrical
         return empyrical.alpha_beta(
             self.portfolio_returns(weights), self.market_data.daily_returns
         )
 
     def max_drawdown(self, weights):
+        import empyrical
         return empyrical.max_drawdown(self.portfolio_returns(weights))
 
     def annual_return(self, weights):
+        import empyrical
         return empyrical.annual_return(self.portfolio_returns(weights))
 
     def annual_volatility(self, weights):
+        import empyrical
         return empyrical.annual_volatility(self.portfolio_returns(weights))
 
     def optimize_portfolio(self):
+        from scipy.optimize import minimize
+
         num_assets = len(self.assets)
         args = ()
         constraints = {"type": "eq", "fun": lambda x: np.sum(x) - 1}
@@ -114,6 +120,7 @@ class PortfolioOptimizer:
         )
 
     def plot(self, weights):
+        import empyrical
         # Calculate the portfolio value as the dot product of the weights and the asset prices
         portfolio_returns = self.portfolio_returns(weights)
         portfolio_returns_df = pd.DataFrame(portfolio_returns, index=self.data.index)

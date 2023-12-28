@@ -19,17 +19,27 @@
         }
 
         .profile-image {
-            width: 40%;
-            height: 40%;
+            width: 100%;
+            height: auto;
+        }
+
+        figure {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             margin-top: 30px;
-            margin-right: 20px;
-            margin-left: 20 px;
+            margin-bottom: 30px;
+            margin-right: 40px;
+            margin-left: 40px;
             min-width: 200px;
         }
 
         .bio {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 20px auto;
+            font-size: 20px;
         }
 
         .btn {
@@ -51,7 +61,12 @@
     </header>
 
     <main class="main-content">
-        <img class="profile-image" src="{{ url_for('static', filename='profile-pic.jpg') }}" alt="Omar Elmofty">
+        <figure>
+            <img class="profile-image" src="{{ url_for('static', filename='profile-pic.png') }}" alt="Omar Elmofty">
+            <figcaption>Sensō-ji, Tokyo, Japan</figcaption>
+        </figure>
+        <!-- <img class="profile-image" src="{{ url_for('static', filename='profile-pic.png') }}" alt="Omar Elmofty"> -->
+
         <div class="bio">
             <p>I'm Omar, a seasoned robotics developer specializing in motion planning and controls.<br><br>
                 🎓 Armed with a Master's degree in Aerial Robotics from the University of Toronto, I've dedicated the
@@ -60,7 +75,8 @@
                 💡 Innovation runs through my veins—I hold two patents for innovative mechanical designs that optimize
                 automotive manufacturing processes.<br><br>
 
-                💻 Proficient in C++ and Python, I love programming and have passion for it and thrive to push the boundaries
+                💻 Proficient in C++ and Python, I love programming and have passion for it and thrive to push the
+                boundaries
                 in the field of robotics and high performance computing.<br><br>
 
                 🏞️ Beyond the world of code, I find solace in the great outdoors. Jogging, hiking, and
@@ -71,13 +87,16 @@
             </p>
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <a href="https://www.linkedin.com/in/omar-s-elmofty" target="_blank">
-                    <img src="{{ url_for('static', filename='linkedin_logo.png') }}" style="width: 100px;" alt="LinkedIn Logo">
+                    <img src="{{ url_for('static', filename='linkedin_logo.png') }}" style="width: 100px;"
+                        alt="LinkedIn Logo">
                 </a>
                 <a href="https://medium.com/@oelmofty" target="_blank">
-                    <img src="{{ url_for('static', filename='medium_logo.png') }}" style="width: 120px; margin: 10px;" alt="Medium Logo">
+                    <img src="{{ url_for('static', filename='medium_logo.png') }}" style="width: 120px; margin: 10px;"
+                        alt="Medium Logo">
                 </a>
                 <a href="https://github.com/Omar-Elmofty" target="_blank">
-                    <img src="{{ url_for('static', filename='github_logo.png') }}" style="width: 110px; margin: 10px;" alt="Github Logo">
+                    <img src="{{ url_for('static', filename='github_logo.png') }}" style="width: 110px; margin: 10px;"
+                        alt="Github Logo">
                 </a><br>
                 <a href="/portfolio" class="btn" target="_blank">Portfolio Analyzer</a>
 
