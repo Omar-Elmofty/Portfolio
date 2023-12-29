@@ -36,14 +36,12 @@ class AssetAnalyzer:
     def plot(self):
         from empyrical import cum_returns
         plt.figure()
-        self.asset_data.data["Adj Close"].plot()
-        # cum_returns(self.asset_data.daily_returns).plot()
-        # cum_returns(self.market_data.daily_returns).plot()
-        # plt.legend([f"{self.ticker} Returns", f"{self.market_ticker} Returns"])
-        # plt.title(f"{self.ticker} vs Market ({self.market_ticker})")
-        plt.ylabel("Security Price")
+        cum_returns(self.market_data.daily_returns).plot()
+        cum_returns(self.asset_data.daily_returns).plot()
+        plt.legend([f"{self.market_ticker} Returns", f"{self.ticker} Returns"])
+        plt.title(f"{self.ticker} vs Market ({self.market_ticker})")
+        plt.ylabel("Returns")
         plt.xlabel("Date")
-        # plt.ylabel("Cumulative Returns")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze an asset.")

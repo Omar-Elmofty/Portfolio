@@ -124,12 +124,12 @@ class PortfolioOptimizer:
         # Calculate the portfolio value as the dot product of the weights and the asset prices
         portfolio_returns = self.portfolio_returns(weights)
         portfolio_returns_df = pd.DataFrame(portfolio_returns, index=self.data.index)
-        plt.plot(empyrical.cum_returns(portfolio_returns_df))
         plt.plot(empyrical.cum_returns(self.market_data.daily_returns))
-        plt.legend([f"Portfolio Returns", f"Market {self.market_data.ticker} returns"])
+        plt.plot(empyrical.cum_returns(portfolio_returns_df))
+        plt.legend([f"Market {self.market_data.ticker} returns", f"Portfolio Returns"])
         plt.title(f"Portfolio vs Market ({self.market_data.ticker})")
         plt.xlabel("Time")
-        plt.ylabel("Cum returns")
+        plt.ylabel("Returns")
 
 
 if __name__ == "__main__":

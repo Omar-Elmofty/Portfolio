@@ -130,5 +130,5 @@ def images(filename):
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run(host='192.168.100.253', debug=True, port=5000) # for running on local network (use ifconfig to get your IP address)
+    app.run(debug=True)
+    # app.run(host='192.168.100.253', debug=True, port=5000) # for running on local network (use ifconfig to get your IP address)
