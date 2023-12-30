@@ -3,6 +3,8 @@
 import argparse
 import matplotlib.pyplot as plt
 from asset_data import AssetData
+import empyrical
+
 
 class AssetAnalyzer:
     def __init__(self, ticker, start_date, end_date, market_ticker="^GSPC"):
@@ -12,32 +14,26 @@ class AssetAnalyzer:
         self.market_ticker = market_ticker
 
     def sharpes_ratio(self):
-        from empyrical import sharpe_ratio
-        return sharpe_ratio(self.asset_data.daily_returns)
+        return empyrical.sharpe_ratio(self.asset_data.daily_returns)
 
     def alpha_beta(self):
-        from empyrical import alpha_beta
-        return alpha_beta(
+        return empyrical.alpha_beta(
             self.asset_data.daily_returns, self.market_data.daily_returns
         )
 
     def max_drawdown(self):
-        from empyrical import max_drawdown
-        return max_drawdown(self.asset_data.daily_returns)
+        return empyrical.max_drawdown(self.asset_data.daily_returns)
 
     def annual_return(self):
-        from empyrical import annual_return
-        return annual_return(self.asset_data.daily_returns)
+        return empyrical.annual_return(self.asset_data.daily_returns)
 
     def annual_volatility(self):
-        from empyrical import annual_volatility
-        return annual_volatility(self.asset_data.daily_returns)
+        return empyrical.annual_volatility(self.asset_data.daily_returns)
 
     def plot(self):
-        from empyrical import cum_returns
         plt.figure()
-        cum_returns(self.market_data.daily_returns).plot()
-        cum_returns(self.asset_data.daily_returns).plot()
+        empyrical.cum_returns(self.market_data.daily_returns).plot()
+        empyrical.cum_returns(self.asset_data.daily_returns).plot()
         plt.legend([f"{self.market_ticker} Returns", f"{self.ticker} Returns"])
         plt.title(f"{self.ticker} vs Market ({self.market_ticker})")
         plt.ylabel("Returns")

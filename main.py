@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
 import sys
 import os
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/backend/"
 print(dir_path)
