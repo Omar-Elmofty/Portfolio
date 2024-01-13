@@ -4,7 +4,6 @@ import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/backend/"
-print(dir_path)
 sys.path.append(dir_path)
 from portfolio_optimizer import PortfolioOptimizer
 from asset_analyzer import AssetAnalyzer
@@ -25,6 +24,11 @@ def home():
 @app.route("/portfolio", methods=["GET"])
 def portfolio():
     return render_template("portfolio_analysis.html")
+
+
+@app.route("/patents", methods=["GET"])
+def patents():
+    return render_template("patents.html")
 
 
 def process_portfolio(data, optimize):

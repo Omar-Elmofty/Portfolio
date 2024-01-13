@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patents Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .bio {
+            max-width: 1000px;
+            margin: 20px auto;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Patents</h1>
+
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <img src="{{ url_for('static', filename='patent1.jpg') }}" style="width: 30%; margin: 10px;"
+            alt="Image of Patent 1"><br>
+        <a class="bio" href="https://patents.google.com/patent/US10232898B2/en" target="_blank">Self-locking clamp
+            apparatus</a><br>
+        <p class="bio">This patent describes an innovative self-locking clamp apparatus designed to enhance safety and
+            ergonomics in vehicle assembly. It focuses on a clamp assembly that attaches to vehicle panels, such as
+            doors, during the assembly process. The design includes multiple linkages and a lever-operated clamp that
+            engages panels from opposite sides, ensuring a secure hold. This mechanism not only improves the accuracy of
+            panel positioning but also significantly reduces the physical strain on workers, thereby enhancing ergonomic
+            efficiency. By automating the clamping and alignment process, it minimizes the risk of injuries and errors,
+            contributing to a safer and more efficient vehicle assembly environment.</p><br>
+            <img src="{{ url_for('static', filename='patent2.jpg') }}" style="width: 30%; margin: 10px;"
+                alt="Image of Patent 2"><br>
+            <a class="bio" href="https://patents.google.com/patent/CA2902839A1/en" target="_blank">Improved Water Jacket
+                Configuration
+                for Spot Welding Assembly</a><br>
+        <p class="bio">This patent addresses the issue of corrosion in spot welding gun assemblies caused by galvanic
+            action in coolant exchanges. It proposes an innovative assembly and method to reduce corrosion by using an
+            insert within the support arm's coolant exchange network. This insert, made from materials like copper or
+            its alloys, is less reactive than aluminum in the presence of coolant. It features a threaded passage for
+            securely attaching the water jacket tube and is designed for easy replacement to extend the operational life
+            of the assembly. The patent also details various embodiments and configurations of this insert, emphasizing
+            its adaptability to different arm sizes and materials.</p>
+    </div>
+</body>
+
+</html>
