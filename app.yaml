@@ -13,11 +13,17 @@
 # limitations under the License.
 
 runtime: python38
-instance_class: F4
-resources:
-  cpu: 2
-  memory_gb: 2.3
-  disk_size_gb: 10
+instance_class: F1
+
+# Uncomment this section to specify resources.
+# resources:
+#   cpu: 1
+#   memory_gb: 1.5
+#   disk_size_gb: 1.0
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 1
 
 handlers:
   # This configures Google App Engine to serve the files in the app's static

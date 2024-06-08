@@ -5,15 +5,31 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/backend/"
 sys.path.append(dir_path)
-from portfolio_optimizer import PortfolioOptimizer
-from asset_analyzer import AssetAnalyzer
-import matplotlib.pyplot as plt
-import io
-import urllib
-import base64
-import numpy as np
 
 app = Flask(__name__)
+
+
+@app.route("/get-lailabdy-token", methods=["GET"])
+def get_token():
+
+    # Lazy import to reduce ram usage
+    from google.oauth2 import service_account
+    from google.auth.transport.requests import Request
+
+    # Load the credentials from the service account key file
+    credentials = service_account.Credentials.from_service_account_file(
+        "./laila27bdy-firebase-adminsdk-8dsrx-a273543c63.json"
+    )
+    scoped_credentials = credentials.with_scopes(
+        ["https://www.googleapis.com/auth/firebase.messaging"]
+    )
+
+    # Obtain an access token
+    request = Request()
+    scoped_credentials.refresh(request)
+
+    # Return the access token.
+    return jsonify({"access_token": scoped_credentials.token})
 
 
 @app.route("/", methods=["GET"])
@@ -32,6 +48,14 @@ def patents():
 
 
 def process_portfolio(data, optimize):
+    # Lazy import to reduce ram usage
+    from portfolio_optimizer import PortfolioOptimizer
+    from numpy import sum as np_sum
+    from base64 import b64encode
+    from urllib import parse
+    from io import BytesIO
+    import matplotlib.pyplot as plt
+
     tickers = data.getlist("tickers[]")
     start_date = data.get("start_date")
     end_date = data.get("end_date")
@@ -43,7 +67,7 @@ def process_portfolio(data, optimize):
         weights = data.getlist("weights[]")
         weights = [float(weight) for weight in weights]
         # normalize weights so they're all equal to 1
-        total_weights = np.sum(weights)
+        total_weights = np_sum(weights)
         weights = [weight / total_weights for weight in weights]
 
     portfolio_return = round(analyzer.annual_return(weights) * 100, 1)
@@ -55,10 +79,10 @@ def process_portfolio(data, optimize):
     max_drawdown = round(analyzer.max_drawdown(weights) * 100, 1)
     plt.figure()
     analyzer.plot(weights)
-    img = io.BytesIO()
+    img = BytesIO()
     plt.savefig(img, format="png")
     img.seek(0)
-    plot_url = urllib.parse.quote(base64.b64encode(img.read()).decode())
+    plot_url = parse.quote(b64encode(img.read()).decode())
 
     if optimize:
         # express weights as a percentage
@@ -94,6 +118,12 @@ def analyze_portfolio():
 
 @app.route("/analyze_asset", methods=["POST"])
 def analyze_asset():
+    from asset_analyzer import AssetAnalyzer
+    from base64 import b64encode
+    from urllib import parse
+    from io import BytesIO
+    import matplotlib.pyplot as plt
+
     data = request.form
     ticker = data.get("ticker")
     start_date = data.get("start_date")
@@ -109,10 +139,10 @@ def analyze_asset():
     beta = round(beta, 2)
     max_drawdown = round(analyzer.max_drawdown() * 100, 1)
     analyzer.plot()
-    img = io.BytesIO()
+    img = BytesIO()
     plt.savefig(img, format="png")
     img.seek(0)
-    plot_url = urllib.parse.quote(base64.b64encode(img.read()).decode())
+    plot_url = parse.quote(b64encode(img.read()).decode())
 
     return render_template(
         "results.html",

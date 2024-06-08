@@ -39,6 +39,7 @@ class AssetAnalyzer:
         plt.ylabel("Returns")
         plt.xlabel("Date")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze an asset.")
     parser.add_argument("ticker", help="Ticker symbol for the asset")

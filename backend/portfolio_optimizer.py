@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 import empyrical
 
+
 class PortfolioOptimizer:
     def __init__(
         self,
@@ -18,7 +19,7 @@ class PortfolioOptimizer:
         sharpe_weight=1.0,
         return_weight=0.0,
         volatility_weight=0.0,
-    ):  
+    ):
         self.assets = [AssetData(ticker, start_date, end_date) for ticker in tickers]
         self.market_data = AssetData(market_ticker, start_date, end_date)
         self.data = self.combine_data()
