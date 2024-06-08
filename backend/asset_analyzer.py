@@ -13,6 +13,15 @@ class AssetAnalyzer:
         self.ticker = ticker
         self.market_ticker = market_ticker
 
+    def validate(self):
+        if len(self.asset_data.data) == 0:
+            print("No data found for {self.ticker}")
+            return False, self.ticker
+        if len(self.market_data.data) == 0:
+            print("No data found for {self.market_ticker}")
+            return False, self.market_ticker
+        return True, ""
+
     def sharpes_ratio(self):
         return empyrical.sharpe_ratio(self.asset_data.daily_returns)
 

@@ -42,6 +42,16 @@ class PortfolioOptimizer:
             self.market_data.daily_returns.values
         )
 
+    def validate(self):
+        for asset in self.assets:
+            if len(asset.data) == 0:
+                print(f"No data found for {asset.ticker}")
+                return False, asset.ticker
+        if len(self.market_data.data) == 0:
+            print(f"No data found for {self.market_data.ticker}")
+            return False, self.market_data.ticker
+        return True, ""
+
     def combine_data(self):
         data = pd.concat([asset.data["Adj Close"] for asset in self.assets], axis=1)
         data.columns = [asset.ticker for asset in self.assets]

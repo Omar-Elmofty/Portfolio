@@ -60,6 +60,10 @@ def process_portfolio(data, optimize):
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     analyzer = PortfolioOptimizer(tickers, start_date, end_date)
+    success, failed_ticker = analyzer.validate()
+    if not(success):
+        return jsonify({"error": f"No data found for {failed_ticker}"})
+
     weights = []
     if optimize:
         weights = analyzer.optimize_portfolio_sharpe()
@@ -129,6 +133,9 @@ def analyze_asset():
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     analyzer = AssetAnalyzer(ticker, start_date, end_date)
+    success, failed_ticker = analyzer.validate()
+    if not(success):
+        return jsonify({"error": f"No data found for {failed_ticker}"})
     # Call the methods of the AssetAnalyzer class and get the results
     # For example:
     asset_return = round(analyzer.annual_return() * 100, 1)
