@@ -5,7 +5,7 @@
     {% include 'analytics.html' %}
 
     <title>Portfolio Analyzer</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='portfolio_styles.css') }}">
 </head>
 
 <body>
@@ -124,7 +124,11 @@
             addTicker(false, 'optimizer-tickers')
         });
     </script>
-    <a href="{{ url_for('home') }}">Created by Omar Elmofty</a>
+    <p>
+        For more details on how the tool works, checkout my blog post <a
+            href="https://medium.com/@oelmofty/i-created-my-own-stock-portfolio-optimizer-09d830ef503b">here</a>.<br><br>
+        Created by <a href="{{ url_for('home') }}">Omar Elmofty</a>
+    </p>
 
 </body>
 

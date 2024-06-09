@@ -5,27 +5,13 @@
     {% include 'analytics.html' %}
 
     <title>Patents Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .bio {
-            max-width: 1000px;
-            margin: 20px auto;
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
     <h1>Patents</h1>
 
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="vertical-container">
         <img src="{{ url_for('static', filename='patent1.jpg') }}" style="width: 30%; margin: 10px;"
             alt="Image of Patent 1"><br>
         <a class="bio" href="https://patents.google.com/patent/US10232898B2/en" target="_blank">Self-locking clamp
@@ -37,11 +23,11 @@
             panel positioning but also significantly reduces the physical strain on workers, thereby enhancing ergonomic
             efficiency. By automating the clamping and alignment process, it minimizes the risk of injuries and errors,
             contributing to a safer and more efficient vehicle assembly environment.</p><br>
-            <img src="{{ url_for('static', filename='patent2.jpg') }}" style="width: 30%; margin: 10px;"
-                alt="Image of Patent 2"><br>
-            <a class="bio" href="https://patents.google.com/patent/CA2902839A1/en" target="_blank">Improved Water Jacket
-                Configuration
-                for Spot Welding Assembly</a><br>
+        <img src="{{ url_for('static', filename='patent2.jpg') }}" style="width: 30%; margin: 10px;"
+            alt="Image of Patent 2"><br>
+        <a class="bio" href="https://patents.google.com/patent/CA2902839A1/en" target="_blank">Improved Water Jacket
+            Configuration
+            for Spot Welding Assembly</a><br>
         <p class="bio">This patent addresses the issue of corrosion in spot welding gun assemblies caused by galvanic
             action in coolant exchanges. It proposes an innovative assembly and method to reduce corrosion by using an
             insert within the support arm's coolant exchange network. This insert, made from materials like copper or

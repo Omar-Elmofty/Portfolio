@@ -165,11 +165,13 @@ def analyze_asset():
         plot_url=plot_url,
     )
 
-
 @app.route("/images/<filename>")
 def images(filename):
     return send_from_directory(os.path.join("static", "images"), filename)
 
+@app.route("/personal_projects", methods=["GET"])
+def personal_projects():
+    return render_template("personal_projects.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

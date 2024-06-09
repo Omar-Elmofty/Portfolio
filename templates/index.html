@@ -5,56 +5,7 @@
     {% include 'analytics.html' %}
 
     <title>Omar Elmofty</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .main-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-        }
-
-        .profile-image {
-            width: 100%;
-            height: auto;
-        }
-
-        figure {
-            width: 25%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            margin-right: 40px;
-            margin-left: 40px;
-            min-width: 400px;
-        }
-
-        .bio {
-            max-width: 1000px;
-            margin: 20px auto;
-            font-size: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
@@ -62,12 +13,11 @@
         <h1>Omar Elmofty</h1>
     </header>
 
-    <main class="main-content">
-        <figure>
-            <img class="profile-image" src="{{ url_for('static', filename='profile-pic.jpg') }}" alt="Omar Elmofty">
+    <main class="horizontal-container">
+        <figure class="profile-figure">
+            <img class="flex-image" src="{{ url_for('static', filename='profile-pic.jpg') }}" alt="Omar Elmofty">
             <figcaption>Sensō-ji, Tokyo, Japan</figcaption>
         </figure>
-        <!-- <img class="profile-image" src="{{ url_for('static', filename='profile-pic.png') }}" alt="Omar Elmofty"> -->
 
         <div class="bio">
             <p>I'm Omar, a seasoned robotics developer specializing in robotic motion planning and controls.<br><br>
@@ -92,7 +42,7 @@
                 🇪🇬🇨🇦 Originally from Cairo, Egypt, I now live in the Greater Toronto Area in Ontario,
                 Canada.<br><br>
             </p>
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="vertical-container">
                 <a href="https://www.linkedin.com/in/omar-s-elmofty" target="_blank">
                     <img src="{{ url_for('static', filename='linkedin_logo.png') }}" style="width: 100px;"
                         alt="LinkedIn Logo">
@@ -105,9 +55,9 @@
                     <img src="{{ url_for('static', filename='github_logo.png') }}" style="width: 110px; margin: 10px;"
                         alt="Github Logo">
                 </a><br>
-                <a href="/patents" class="btn" target="_blank">Patents</a>
+                <a href="/patents" class="btn">Patents</a>
                 <div><br></div>
-                <a href="/portfolio" class="btn" target="_blank">Portfolio Analyzer</a>
+                <a href="/personal_projects" class="btn">Personal Projects</a>
             </div>
         </div>
     </main>
