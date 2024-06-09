@@ -61,7 +61,7 @@ def process_portfolio(data, optimize):
     end_date = data.get("end_date")
     analyzer = PortfolioOptimizer(tickers, start_date, end_date)
     success, failed_ticker = analyzer.validate()
-    if not(success):
+    if not (success):
         return jsonify({"error": f"No data found for {failed_ticker}"})
 
     weights = []
@@ -134,7 +134,7 @@ def analyze_asset():
     end_date = data.get("end_date")
     analyzer = AssetAnalyzer(ticker, start_date, end_date)
     success, failed_ticker = analyzer.validate()
-    if not(success):
+    if not (success):
         return jsonify({"error": f"No data found for {failed_ticker}"})
     # Call the methods of the AssetAnalyzer class and get the results
     # For example:
@@ -165,13 +165,16 @@ def analyze_asset():
         plot_url=plot_url,
     )
 
+
 @app.route("/images/<filename>")
 def images(filename):
     return send_from_directory(os.path.join("static", "images"), filename)
 
+
 @app.route("/personal_projects", methods=["GET"])
 def personal_projects():
     return render_template("personal_projects.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
