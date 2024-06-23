@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+   <meta name="description" content="Discrete event simulator for factories." />
+   <title>Factory Simulator</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='factory_simulator_css/index.css') }}">
+</head>
+
+<body>
+   <div class="md:flex flex-col md:flex-row md:min-h-screen w-full max-w-screen-xl mx-auto">
+      <div id="navSide" class="flex flex-col w-full md:w-48 text-gray-700 bg-white flex-shrink-0"></div>
+      <script src="https://unpkg.com/gojs"></script>
+      <div id="allSampleContent" class="p-4 w-full">
+         <script id="code" src=" {{ url_for('static', filename='factory_simulator_scripts/settings.js') }}"></script>
+         <script id="code" src=" {{ url_for('static', filename='factory_simulator_scripts/main.js') }}"></script>
+         <div id="sample">
+            <div class="container">
+               <div class="center">
+                  <h1>Factory Simulator</h1>
+               </div>
+            </div>
+            <div style="width: 100%; display: flex; justify-content: space-between">
+               <div id="myPaletteDiv"
+                  style="width: 200px; margin-right: 2px; background-color: rgb(151, 151, 151); border: solid 1px black">
+               </div>
+               <div id="myDiagramDiv"
+                  style="flex-grow: 1; height: 500px; border: solid 1px black; background-color: rgb(151, 151, 151);">
+               </div>
+            </div>
+            <!-- <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 600px"></div> -->
+            <div>
+               <div class="container">
+                  <div class="center">
+                     <button id="SaveButton" class="buttonStyle">Save Model</button>
+                     <button class="buttonStyle" onclick="document.getElementById('FileSelector').click()">Load
+                        Model</button>
+                     <input type='file' id="FileSelector" style="display:none"><br><br>
+                  </div>
+               </div>
+               <div class="container">
+                  <div class="center">
+                     <label for="simulation_time">Simulation time:</label>
+                     <input type="number" step="1" min="1" id="SimulationTime" name="simulation_time" value="10000">
+                     <input class="buttonStyle" id="SendModel" type="button" value="Run Simulation">
+                  </div>
+               </div>
+               <p id="simulationRunningText" style="display:none;color:green;">Running Simulation ....</p>
+               <p>Simulation results:</p>
+               <textarea id="SimulationResults" style="width:100%;height:300px"></textarea>
+            </div>
+         </div>
+      </div>
+      <div id="settings-drawer"></div>
+   </div>
+</body>
+
+</html>

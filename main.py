@@ -6,6 +6,14 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/backend/"
 sys.path.append(dir_path)
 
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+dir_path += "/factory_simulator/simulation_backend/"
+sys.path.append(dir_path)
+
+
+
+
 app = Flask(__name__)
 
 
@@ -174,6 +182,32 @@ def images(filename):
 @app.route("/personal_projects", methods=["GET"])
 def personal_projects():
     return render_template("personal_projects.html")
+
+
+@app.route("/factory_simulator", methods=["GET"])
+def index():
+    return render_template("factory_simulator.html")
+
+
+@app.route("/simulate", methods=["POST"])
+def simulate():
+    if request.method == "POST":
+        stats_dict = {}
+        try:
+            import model
+            import json
+            request_json = request.get_json()
+            model_json = json.loads(request_json["model"])
+            model = model.createModelFromGoJSJson(model_json)
+            simulation_time = int(request_json["simulation_time"])
+            model.run(simulation_time)
+            stats_dict = model.statistics()
+        except Exception as e:
+            import traceback2 as traceback
+            print(e)
+            traceback.print_exc()
+            stats_dict = {"error": str(e), "traceback": traceback.format_exc()}
+        return {"output": stats_dict}
 
 
 if __name__ == "__main__":
