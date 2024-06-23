@@ -1,0 +1,3 @@
+[submodule "factory_simulator"]
+	path = factory_simulator
+	url = https://github.com/Omar-Elmofty/factory_simulator.git
