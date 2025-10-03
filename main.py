@@ -6,16 +6,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/backend/"
 sys.path.append(dir_path)
 
-
 dir_path = os.path.dirname(os.path.realpath(__file__))
 dir_path += "/factory_simulator/simulation_backend/"
 sys.path.append(dir_path)
 
-
-
-
 app = Flask(__name__)
-
 
 @app.route("/get-lailabdy-token", methods=["GET"])
 def get_token():
@@ -188,6 +183,20 @@ def personal_projects():
 def index():
     return render_template("factory_simulator.html")
 
+
+@app.route("/knowledge_compendium/", methods=["GET"])
+def knowledge_compendium():
+    try:
+        return send_from_directory("knowledge_compendium/knowledge_compendium/_build/html/", "index.html")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
+
+@app.route("/knowledge_compendium/<path:filename>", methods=["GET"])
+def get_template_file(filename):
+    try:
+        return send_from_directory("knowledge_compendium/knowledge_compendium/_build/html/", filename)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
 
 @app.route("/simulate", methods=["POST"])
 def simulate():
