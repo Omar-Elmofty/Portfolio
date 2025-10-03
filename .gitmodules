@@ -1,3 +1,6 @@
 [submodule "factory_simulator"]
 	path = factory_simulator
 	url = https://github.com/Omar-Elmofty/factory_simulator.git
+[submodule "knowledge_compendium"]
+	path = knowledge_compendium
+	url = https://github.com/Omar-Elmofty/knowledge_compendium.git
